@@ -29,19 +29,19 @@ function wc_rest_payment_endpoint_handler() {
 	$error          = new WP_Error();
 
 	if ( empty( $payment_method ) ) {
-		$error->add( 400, __( 'Payment Method is required.', 'wc-rest-payment' ), array( 'status' => 400 ) );
+		$error->add( 400, __( "Payment Method 'payment_method' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
 
 		return $error;
 
 	}
 	if ( empty( $order_id ) ) {
-		$error->add( 400, __( 'Order ID is required.', 'wc-rest-payment' ), array( 'status' => 400 ) );
+		$error->add( 400, __( "Order ID 'order_id' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
 
 		return $error;
 
 	}
 	if ( empty( $payment_token ) ) {
-		$error->add( 400, __( 'Payment Token is required.', 'wc-rest-payment' ), array( 'status' => 400 ) );
+		$error->add( 400, __( "Payment Token 'payment_token' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
 
 		return $error;
 
