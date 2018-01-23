@@ -9,11 +9,19 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
-WC REST Payment adds in the missing `payment processing REST API` endpoint for `WooCommerce`. 
+WC REST Payment adds in the missing REST API endpoint for **process payment** in `WooCommerce`. 
  
 == Description ==
+
+If you¡¯re a front end developer, looking to develop an app/web with WordPress+WooCommerce as your backend using REST API. You¡¯ll find that [WooCommerce docs does](http://woocommerce.github.io/woocommerce-rest-api-docs/) not provide the **process payment** endpoint. 
+
+WC REST Payment adds in the missing REST API endpoint for **process payment** in `WooCommerce`. 
  
-// TODO
+**IMPORTANT NOTICE:**
+
+This plugin only provides the **process payment** function for WooCommerce, however it does not update the status of the `order` object in WooCommerce. 
+
+This means that you (the front end app/web) is responsible for updating the `order` object, after the successful **payment process**.
 
 = Usage =
 
@@ -25,22 +33,22 @@ WC REST Payment adds in the missing `payment processing REST API` endpoint for `
 1. Activate the plugin through the 'Plugins' menu in WordPress
  
 == Frequently Asked Questions ==
- 
-= Why do I need WC REST Payment? =
- 
-// TODO
- 
-= Does this plugin work with WooCommerce? =
- 
-// TODO 
+
+= What version of WordPress is required? =
+
+For security reasons, We always recommend you use the latest version of WordPress.
+For native REST API support, we recommend you use WordPress 4.7+.
+For WordPress version lower than 4.7, you¡¯ll need to install [WordPress REST API (Version 2)](https://wordpress.org/plugins/rest-api/).
 
 = What version of WooCommerce is required? =
 
-// TODO 
+WooCommerce v1.0+
 
 = What payment gateways are supported? =
 
-// TODO 
+The supported payment gateways are listed below:
+
+* [Stripe](https://stripe.com)
  
 = There's a bug, what do I do? =
 
