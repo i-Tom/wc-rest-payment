@@ -49,18 +49,20 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 	}
 	
 	if ( $payment_method === "stripe" ) {
-		$wc_gateway_stripe                    = new WC_Gateway_Stripe();
+		$wc_gateway_stripe                = new WC_Gateway_Stripe();
 		$_POST['stripe_token']            = $payment_token;
 		$_POST['wc-stripe-payment-token'] = $payment_token;
 	
 
-		return new WP_REST_Response( array(), 123 );
+		return new WP_REST_Response( array("a"), 123 );
 
 		$payment_result                   = $wc_gateway_stripe->process_payment( $order_id );
+		return new WP_REST_Response( array("b"), 123 );
 		if ( $payment_result['result'] === "success" ) {
 			$response['code']    = 200;
 			$response['message'] = __( "Your Payment was Successful", "wc-rest-payment" );
 		} else {
+		return new WP_REST_Response( array("c"), 123 );
 			$response['code']    = 401;
 			$response['message'] = __( "Please enter valid card details", "wc-rest-payment" );
 		}
