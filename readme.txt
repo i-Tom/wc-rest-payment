@@ -25,7 +25,7 @@ This means that you (the front end app/web) is responsible for updating the `ord
 
 = Usage =
 
-// TODO
+See Screenshot.
  
 == Installation ==
   
