@@ -55,7 +55,7 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 		$payment_result                   = $wc_gateway_stripe->process_payment( $order_id );
 		if ( $payment_result['result'] === "success" ) {
 			$response['code']    = 200;
-			$response['message'] = __( "Your Payment Successfully", "wc-rest-payment" );
+			$response['message'] = __( "Your Payment was Successful", "wc-rest-payment" );
 		} else {
 			$response['code']    = 401;
 			$response['message'] = __( "Please enter valid card details", "wc-rest-payment" );
@@ -66,5 +66,5 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 	}
 	
 
-	return $response;
+	return new WP_REST_Response( $response, $response['code'] );
 }
