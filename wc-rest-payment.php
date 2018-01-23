@@ -20,10 +20,10 @@ function wc_rest_payment_endpoints() {
 	) );
 }
 
-function wc_rest_payment_endpoint_handler() {
+function wc_rest_payment_endpoint_handler( $request = null ) {
 
 	$response       = array();
-	$parameters = $request->get_json_params();
+	$parameters 	= $request->get_json_params();
 	$payment_method = sanitize_text_field( $parameters['payment_method'] );
 	$order_id       = sanitize_text_field( $parameters['order_id'] );
 	$payment_token  = sanitize_text_field( $parameters['payment_token'] );
