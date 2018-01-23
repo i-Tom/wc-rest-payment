@@ -40,8 +40,10 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 
 		return $error;
 
-	} else {
-		return new WP_REST_Response( array(wc_get_order($order_id)), 123 );
+	} else if (wc_get_order($order_id)) {
+		$error->add( 400, __( "Order ID 'order_id' is invalid. Order does not exist.", 'wc-rest-payment' ), array( 'status' => 400 ) );
+
+		return $error;
 	}
 	if ( empty( $payment_token ) ) {
 		$error->add( 400, __( "Payment Token 'payment_token' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
