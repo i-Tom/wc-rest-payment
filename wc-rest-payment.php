@@ -49,7 +49,6 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 		$wc_gateway_stripe                = new WC_Gateway_Stripe();
 		$_POST['stripe_token']            = $payment_token;
 		$_POST['wc-stripe-payment-token'] = $payment_token;
-		return new WP_REST_Response( array("a"), 123 );
 		$payment_result                   = $wc_gateway_stripe->process_payment( $order_id );
 		return new WP_REST_Response( array("b"), 123 );
 		if ( $payment_result['result'] === "success" ) {
