@@ -40,7 +40,7 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 
 		return $error;
 
-	} else if (wc_get_order($order_id)) {
+	} else if ( wc_get_order($order_id) == false ) {
 		$error->add( 400, __( "Order ID 'order_id' is invalid. Order does not exist.", 'wc-rest-payment' ), array( 'status' => 400 ) );
 
 		return $error;
