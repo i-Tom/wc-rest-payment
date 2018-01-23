@@ -52,7 +52,8 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 		try{
 			$payment_result               = $wc_gateway_stripe->process_payment( $order_id );
 		} catch (\WC_Stripe_Exception $exception) {
-			return new WP_REST_Response( array($exception->getMessage()), 123 );
+			return new WP_REST_Response( array("b"), 123 );
+		    // echo $exception->getMessage();
 		}
 		if ( $payment_result['result'] === "success" ) {
 			$response['code']    = 200;
