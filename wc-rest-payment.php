@@ -31,31 +31,25 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 
 	if ( empty( $payment_method ) ) {
 		$error->add( 400, __( "Payment Method 'payment_method' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
-
 		return $error;
-
 	}
 	if ( empty( $order_id ) ) {
 		$error->add( 400, __( "Order ID 'order_id' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
-
 		return $error;
-
 	} else if ( wc_get_order($order_id) == false ) {
 		$error->add( 400, __( "Order ID 'order_id' is invalid. Order does not exist.", 'wc-rest-payment' ), array( 'status' => 400 ) );
-
 		return $error;
 	}
 	if ( empty( $payment_token ) ) {
 		$error->add( 400, __( "Payment Token 'payment_token' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
-
 		return $error;
-
 	}
 	
 	if ( $payment_method === "stripe" ) {
 		$wc_gateway_stripe                = new WC_Gateway_Stripe();
 		$_POST['stripe_token']            = $payment_token;
 		$_POST['wc-stripe-payment-token'] = $payment_token;
+		return new WP_REST_Response( array("a"), 123 );
 		$payment_result                   = $wc_gateway_stripe->process_payment( $order_id );
 		return new WP_REST_Response( array("b"), 123 );
 		if ( $payment_result['result'] === "success" ) {
