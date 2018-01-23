@@ -67,7 +67,7 @@ Issues and [pull requests](https://github.com/sk8-pty-ltd/wc-rest-payment/pulls)
  
 == Screenshots ==
  
-// TODO 
+1. An sample REST API POST request to process payment using [WC REST Payment](https://wordpress.org/plugins/wc-rest-payment/).
  
 == Changelog ==
  
