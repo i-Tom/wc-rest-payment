@@ -34,17 +34,17 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 		return $error;
 	}
 	if ( empty( $order_id ) ) {
-		$error->add( 400, __( "Order ID 'order_id' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
+		$error->add( 401, __( "Order ID 'order_id' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
 		return $error;
 	} else if ( wc_get_order($order_id) == false ) {
-		$error->add( 400, __( "Order ID 'order_id' is invalid. Order does not exist.", 'wc-rest-payment' ), array( 'status' => 400 ) );
+		$error->add( 402, __( "Order ID 'order_id' is invalid. Order does not exist.", 'wc-rest-payment' ), array( 'status' => 400 ) );
 		return $error;
 	} else if ( wc_get_order($order_id)->get_status() === 'completed' ) {
-		$error->add( 400, __( "Order status is already 'completed', multiple payment to the same order is not allowed. " . wc_get_order($order_id)->get_status(), 'wc-rest-payment' ), array( 'status' => 400 ) );
+		$error->add( 403, __( "Order status is already 'completed', multiple payment to the same order is not allowed. " . wc_get_order($order_id)->get_status(), 'wc-rest-payment' ), array( 'status' => 400 ) );
 		return $error;
 	}
 	if ( empty( $payment_token ) ) {
-		$error->add( 400, __( "Payment Token 'payment_token' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
+		$error->add( 404, __( "Payment Token 'payment_token' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
 		return $error;
 	}
 	
@@ -61,7 +61,7 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 			$response['message'] = __( "Please enter valid card details", "wc-rest-payment" );
 		}
 	}  else {
-		$response['code'] = 401;
+		$response['code'] = 405;
 		$response['message'] = __( "Please select an available payment method. Supported payment method can be found at https://wordpress.org/plugins/wc-rest-payment/#description", "wc-rest-payment" );
 	}
 	
