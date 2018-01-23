@@ -19,9 +19,8 @@ WC REST Payment adds in the missing REST API endpoint for **process payment** in
  
 **IMPORTANT NOTICE:**
 
-This plugin only provides the **process payment** function for WooCommerce, however it does not update the status of the `order` object in WooCommerce. 
-
-This means that you (the front end app/web) is responsible for updating the `order` object, after the successful **payment process**.
+After payment is processed successfully, the `status` of `order` will be automatically changed to **Completed**. 
+If you with to the status to be set to status other than **Complete** after successful payment process, please submit a pull request.
 
 = Usage =
 
