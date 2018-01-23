@@ -48,13 +48,8 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 	if ( $payment_method === "stripe" ) {
 		$wc_gateway_stripe                = new WC_Gateway_Stripe();
 		$_POST['stripe_token']            = $payment_token;
-		$_POST['wc-stripe-payment-token'] = $payment_token;
-		try{
-			$payment_result               = $wc_gateway_stripe->process_payment( $order_id );
-		} catch (\WC_Stripe_Exception $exception) {
-			return new WP_REST_Response( array("b"), 123 );
-		    // echo $exception->getMessage();
-		}
+		$payment_result               = $wc_gateway_stripe->process_payment( $order_id , false);
+		// return new WP_REST_Response( array("b"), 123 );
 		if ( $payment_result['result'] === "success" ) {
 			$response['code']    = 200;
 			$response['message'] = __( "Your Payment was Successful", "wc-rest-payment" );
