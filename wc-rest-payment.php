@@ -39,8 +39,8 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 	} else if ( wc_get_order($order_id) == false ) {
 		$error->add( 402, __( "Order ID 'order_id' is invalid. Order does not exist.", 'wc-rest-payment' ), array( 'status' => 400 ) );
 		return $error;
-	} else if ( wc_get_order($order_id)->get_status() === 'completed' ) {
-		$error->add( 403, __( "Order status is already 'completed', multiple payment to the same order is not allowed. ", 'wc-rest-payment' ), array( 'status' => 400 ) );
+	} else if ( wc_get_order($order_id)->get_status() != null ) {
+		$error->add( 403, __( "Order status is already 'completed', multiple payment to the same order is not allowed. " . $order_id)->get_status(), 'wc-rest-payment' ), array( 'status' => 400 ) );
 		return $error;
 	}
 	if ( empty( $payment_token ) ) {

@@ -25,6 +25,18 @@ If you with to the status to be set to status other than **Complete** after succ
 = Usage =
 
 Send request using JSON format. See Screenshot.
+
+```
+{
+	"payment_method": "stripe",
+	"order_id": "7843",
+	"payment_token":"tok_mastercard"
+}
+```
+
+1. A list of available `payment_method` can be found at FAQ below.
+2. ¡®order_id¡¯ should be the existing order id in your WooCommerce dashbaord.
+3. A list of available `payment_token ` for Test Mode can be found at [Stripe Testing](https://stripe.com/docs/testing).
  
 == Installation ==
   
