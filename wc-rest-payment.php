@@ -66,5 +66,5 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 	}
 	
 
-	return new WP_REST_Response( "Haha", 123 );
+	return new WP_REST_Response( array(), 123 );
 }
