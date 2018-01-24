@@ -4,7 +4,7 @@
  * Description: WC REST Payment adds in the missing REST API endpoint for **process payment** in WooCommerce. 
  * Author: SK8Tech
  * Author URI: https://sk8.tech
- * Version: 1.0.0
+ * Version: 1.0.5
  * License: GPL2+
  **/
 add_action( 'rest_api_init', 'wc_rest_payment_endpoints' );
