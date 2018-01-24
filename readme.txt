@@ -13,7 +13,7 @@ WC REST Payment adds in the missing REST API endpoint for **process payment** in
  
 == Description ==
 
-If you¡¯re a front end developer, looking to develop an app/web with WordPress+WooCommerce as your backend using REST API. You¡¯ll find that [WooCommerce docs does](http://woocommerce.github.io/woocommerce-rest-api-docs/) not provide the **process payment** endpoint. 
+If you are a front end developer, looking to develop an app/web with WordPress+WooCommerce as your backend using REST API. You will find that [WooCommerce docs does](http://woocommerce.github.io/woocommerce-rest-api-docs/) not provide the **process payment** endpoint. 
 
 WC REST Payment adds in the missing REST API endpoint for **process payment** in `WooCommerce`. 
  
@@ -24,15 +24,15 @@ If you with to the status to be set to status other than **Complete** after succ
 
 = Usage =
 
-Send request using JSON format. See Screenshot.
+Send request with JSON body. See Screenshot.
 
-```
+`
 {
 	"payment_method": "stripe",
 	"order_id": "7843",
 	"payment_token":"tok_mastercard"
 }
-```
+`
 
 1. A list of available `payment_method` can be found at FAQ below.
 2. ¡®order_id¡¯ should be the existing order id in your WooCommerce dashbaord.
@@ -49,7 +49,7 @@ Send request using JSON format. See Screenshot.
 
 For security reasons, We always recommend you use the latest version of WordPress.
 For native REST API support, we recommend you use WordPress 4.7+.
-For WordPress version lower than 4.7, you¡¯ll need to install [WordPress REST API (Version 2)](https://wordpress.org/plugins/rest-api/).
+For WordPress version lower than 4.7, you will need to install [WordPress REST API (Version 2)](https://wordpress.org/plugins/rest-api/).
 
 = What version of WooCommerce is required? =
 
