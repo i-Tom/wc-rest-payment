@@ -26,13 +26,11 @@ If you with to the status to be set to status other than **Complete** after succ
 
 Send request with JSON body. See Screenshot.
 
-`
 {
 	"payment_method": "stripe",
 	"order_id": "7843",
 	"payment_token":"tok_mastercard"
 }
-`
 
 1. A list of available `payment_method` can be found at FAQ below.
 2. ¡®order_id¡¯ should be the existing order id in your WooCommerce dashbaord.
