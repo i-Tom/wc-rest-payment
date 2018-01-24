@@ -1,7 +1,7 @@
 === WC REST Payment ===
 Contributors: jack50n9, sk8tech
 Donate link: https://sk8.tech/donate
-Tags: wc, woocommerce, wc payment, woocommerce payment, rest payment, payment api, payment rest api, json
+Tags: wc, woocommerce, wc payment, woocommerce payment, rest payment, payment api, payment rest api, json, stripe, stripe payment
 Requires at least: 4.7.0
 Tested up to: 4.9.1
 Requires PHP: 5.2.4
