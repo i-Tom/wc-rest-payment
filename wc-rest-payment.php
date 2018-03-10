@@ -56,7 +56,6 @@ function wc_rest_payment_endpoint_handler( $request = null ) {
 			$response['code']    = 200;
 			$response['message'] = __( "Your Payment was Successful", "wc-rest-payment" );
 		} else {
-			return new WP_REST_Response( array("c"), 123 );
 			$response['code']    = 401;
 			$response['message'] = __( "Please enter valid card details", "wc-rest-payment" );
 		}
