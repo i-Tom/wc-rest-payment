@@ -1,4 +1,4 @@
-# wp-rest-filter.php
+# wc-rest-payment.php
 
 Update 'Version' number to x.x.x
 
