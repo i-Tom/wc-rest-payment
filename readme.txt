@@ -38,7 +38,7 @@ Send request with JSON body. See Screenshot.
  
 == Installation ==
   
-1. Upload `wc-rest-payment.php` to the `/wp-content/plugins/` directory
+1. Upload `wc-rest-payment` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
  
 == Frequently Asked Questions ==
