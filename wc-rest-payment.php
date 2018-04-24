@@ -10,7 +10,7 @@
 add_action( 'rest_api_init', 'wc_rest_payment_endpoints' );
 
 function wc_rest_payment_endpoints() {
-
+	
 	/**
 	 * Handle Payment Method request.
 	 */
