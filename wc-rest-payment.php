@@ -1,69 +1,82 @@
 <?php
+
 /**
- * Plugin Name: WC REST Payment
- * Description: WC REST Payment adds in the missing REST API endpoint for **process payment** in WooCommerce. 
- * Author: SK8Tech
- * Author URI: https://sk8.tech
- * Version: 1.0.5
- * License: GPL2+
- **/
-add_action( 'rest_api_init', 'wc_rest_payment_endpoints' );
+ * The plugin bootstrap file
+ *
+ * This file is read by WordPress to generate the plugin information in the plugin
+ * admin area. This file also includes all of the dependencies used by the plugin,
+ * registers the activation and deactivation functions, and defines a function
+ * that starts the plugin.
+ *
+ * @link              https://sk8.tech
+ * @since             1.0.0
+ * @package           Wc_Rest_Payment
+ *
+ * @wordpress-plugin
+ * Plugin Name:       WC REST Payment
+ * Plugin URI:        https://sk8.tech
+ * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Version:           1.0.0
+ * Author:            SK8Tech
+ * Author URI:        https://sk8.tech
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:       wc-rest-payment
+ * Domain Path:       /languages
+ */
 
-function wc_rest_payment_endpoints() {
-	
-	/**
-	 * Handle Payment Method request.
-	 */
-	register_rest_route( 'wc/v2', 'payment', array(
-		'methods'  => 'POST',
-		'callback' => 'wc_rest_payment_endpoint_handler',
-	) );
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
 }
 
-function wc_rest_payment_endpoint_handler( $request = null ) {
+/**
+ * Currently plugin version.
+ * Start at version 1.0.0 and use SemVer - https://semver.org
+ * Rename this for your plugin and update it as you release new versions.
+ */
+define( 'PLUGIN_NAME_VERSION', '1.0.0' );
 
-	$response       = array();
-	$parameters 	= $request->get_json_params();
-	$payment_method = sanitize_text_field( $parameters['payment_method'] );
-	$order_id       = sanitize_text_field( $parameters['order_id'] );
-	$payment_token  = sanitize_text_field( $parameters['payment_token'] );
-	$error          = new WP_Error();
-
-	if ( empty( $payment_method ) ) {
-		$error->add( 400, __( "Payment Method 'payment_method' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
-		return $error;
-	}
-	if ( empty( $order_id ) ) {
-		$error->add( 401, __( "Order ID 'order_id' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
-		return $error;
-	} else if ( wc_get_order($order_id) == false ) {
-		$error->add( 402, __( "Order ID 'order_id' is invalid. Order does not exist.", 'wc-rest-payment' ), array( 'status' => 400 ) );
-		return $error;
-	} else if ( wc_get_order($order_id)->get_status() !== 'pending' ) {
-		$error->add( 403, __( "Order status is NOT 'pending', meaning order had already received payment. Multiple payment to the same order is not allowed. ", 'wc-rest-payment' ), array( 'status' => 400 ) );
-		return $error;
-	}
-	if ( empty( $payment_token ) ) {
-		$error->add( 404, __( "Payment Token 'payment_token' is required.", 'wc-rest-payment' ), array( 'status' => 400 ) );
-		return $error;
-	}
-	
-	if ( $payment_method === "stripe" ) {
-		$wc_gateway_stripe                = new WC_Gateway_Stripe();
-		$_POST['stripe_token']            = $payment_token;
-		$payment_result               = $wc_gateway_stripe->process_payment( $order_id );
-		if ( $payment_result['result'] === "success" ) {
-			$response['code']    = 200;
-			$response['message'] = __( "Your Payment was Successful", "wc-rest-payment" );
-		} else {
-			$response['code']    = 401;
-			$response['message'] = __( "Please enter valid card details", "wc-rest-payment" );
-		}
-	}  else {
-		$response['code'] = 405;
-		$response['message'] = __( "Please select an available payment method. Supported payment method can be found at https://wordpress.org/plugins/wc-rest-payment/#description", "wc-rest-payment" );
-	}
-	
-
-	return new WP_REST_Response( $response, 123 );
+/**
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-wc-rest-payment-activator.php
+ */
+function activate_wc_rest_payment() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wc-rest-payment-activator.php';
+	Wc_Rest_Payment_Activator::activate();
 }
+
+/**
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-wc-rest-payment-deactivator.php
+ */
+function deactivate_wc_rest_payment() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wc-rest-payment-deactivator.php';
+	Wc_Rest_Payment_Deactivator::deactivate();
+}
+
+register_activation_hook( __FILE__, 'activate_wc_rest_payment' );
+register_deactivation_hook( __FILE__, 'deactivate_wc_rest_payment' );
+
+/**
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
+ */
+require plugin_dir_path( __FILE__ ) . 'includes/class-wc-rest-payment.php';
+
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0.0
+ */
+function run_wc_rest_payment() {
+
+	$plugin = new Wc_Rest_Payment();
+	$plugin->run();
+
+}
+run_wc_rest_payment();
