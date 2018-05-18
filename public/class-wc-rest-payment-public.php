@@ -63,7 +63,7 @@ class Wc_Rest_Payment_Public {
 		 */
 		register_rest_route('wc/v2', 'payment', array(
 			'methods' => 'POST',
-			'callback' => 'process_payment',
+			'callback' => array($this, 'process_payment'),
 		));
 	}
 
