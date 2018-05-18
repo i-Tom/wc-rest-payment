@@ -26,15 +26,29 @@ If you with to the status to be set to status other than **Complete** after succ
 
 Send request with JSON body. See Screenshot.
 
+Stripe:
 {
 	"payment_method": "stripe",
 	"order_id": "7843",
 	"payment_token":"tok_mastercard"
 }
 
+PayPal Express:
+{
+	"payment_method": "paypal_express",
+	"payer_id": "EC-xxxxxxxxxxxx",
+	"order_id": "7843",
+	"payment_token":"tok_from_paypal_express_checkout"
+}
+
+
 1. A list of available `payment_method` can be found at FAQ below.
-2. ¡®order_id¡¯ should be the existing order id in your WooCommerce dashbaord.
-3. A list of available `payment_token ` for Test Mode can be found at [Stripe Testing](https://stripe.com/docs/testing).
+2. `order_id` should be the existing order id in your WooCommerce Orders.
+3. Regarding `payment_token`
+	1. Stripe: A list of available testing tokens for `payment_token ` in Test Mode can be found at [Stripe Testing](https://stripe.com/docs/testing).
+	1. PayPal: An integration guide for testing can be found at [Test your integration
+](https://developer.paypal.com/docs/classic/express-checkout/ec_test_your_integration/).
+
  
 == Installation ==
   
@@ -57,7 +71,8 @@ WooCommerce v1.0+
 
 The supported payment gateways are listed below:
 
-* [Stripe](https://stripe.com)
+* [PayPal Express Checkout](https://woocommerce.com/products/woocommerce-gateway-paypal-express-checkout/) Payment Gateway.
+* [Stripe](https://woocommerce.com/products/stripe/) Payment Gateway.
  
 = There's a bug, what do I do? =
 
@@ -70,11 +85,12 @@ Issues and [pull requests](https://github.com/sk8-pty-ltd/wc-rest-payment/pulls)
 == Changelog ==
  
 = 1.1.0 =
+* Added REST API endpoint for [PayPal Express Checkout](https://woocommerce.com/products/woocommerce-gateway-paypal-express-checkout/) Payment Gateway.
 * Restructured plugin directory for future development.
  
 = 1.0.0 =
 * Initial Release.
-* REST API endpoint for Stripe Payment Gateway
+* REST API endpoint for [Stripe](https://woocommerce.com/products/stripe/) Payment Gateway.
 
 == Upgrade Notice ==
 

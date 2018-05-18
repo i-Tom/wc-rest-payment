@@ -106,7 +106,8 @@ class Wc_Rest_Payment_Public {
 			return $error;
 		}
 
-		if ($payment_method === "stripe") {
+		switch ($payment_method) {
+		case "stripe":
 			$wc_gateway_stripe = new WC_Gateway_Stripe();
 			$_POST['stripe_token'] = $payment_token;
 			$payment_result = $wc_gateway_stripe->process_payment($order_id);
@@ -114,10 +115,52 @@ class Wc_Rest_Payment_Public {
 				$response['code'] = 200;
 				$response['message'] = __("Your Payment was Successful", "wc-rest-payment");
 			} else {
-				$response['code'] = 401;
+				$response['code'] = 411;
 				$response['message'] = __("Please enter valid card details", "wc-rest-payment");
 			}
-		} else {
+			break;
+		case "paypal-express":
+			// @see: https://github.com/woocommerce/woocommerce-gateway-paypal-express-checkout/blob/20cd2ba6f66d64106354b1dee314e201b441bc5a/includes/abstracts/abstract-wc-gateway-ppec.php
+			// @author: Jack
+			$checkout = wc_gateway_ppec()->checkout;
+			$order = wc_get_order($order_id);
+
+			try {
+				// Get details
+				$checkout_details = $checkout->get_checkout_details($payment_token);
+				$checkout_context = array(
+					'start_from' => 'checkout',
+					'order_id' => $order_id,
+				);
+				if ($checkout->needs_billing_agreement_creation($checkout_context)) {
+					$checkout->create_billing_agreement($order, $checkout_details);
+				}
+				// Complete the payment now.
+				$payer_id = sanitize_text_field($parameters['payer_id']);
+				$checkout->do_payment($order, $payment_token, $payer_id);
+
+				$response['code'] = 200;
+				$response['message'] = __("Your Payment was Successful", "wc-rest-payment");
+
+			} catch (PayPal_Missing_Session_Exception $e) {
+				// For some reason, our session data is missing. Generally,
+				// if we've made it this far, this shouldn't happen.
+				$response['code'] = 421;
+				$response['message'] = __("Sorry, an error occurred while trying to process your payment. Please try again.", "wc-rest-payment");
+			} catch (PayPal_API_Exception $e) {
+				// Did we get a 10486 or 10422 back from PayPal?  If so, this
+				// means we need to send the buyer back over to PayPal to have
+				// them pick out a new funding method.
+				$response['code'] = 422;
+				$response['message'] = __("Sorry, an error occurred while trying to process your payment. Please regenerate paypal_express_token.", "wc-rest-payment");
+			}
+
+			$payment_result = $wc_gateway_stripe->process_payment($order_id);
+			if ($payment_result['result'] === "success") {
+			} else {
+			}
+			break;
+		default:
 			$response['code'] = 405;
 			$response['message'] = __("Please select an available payment method. Supported payment method can be found at https://wordpress.org/plugins/wc-rest-payment/#description", "wc-rest-payment");
 		}
