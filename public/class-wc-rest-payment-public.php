@@ -154,11 +154,6 @@ class Wc_Rest_Payment_Public {
 				$response['code'] = 422;
 				$response['message'] = __("Sorry, an error occurred while trying to process your payment. Please regenerate paypal_express_token.", "wc-rest-payment");
 			}
-
-			$payment_result = $wc_gateway_stripe->process_payment($order_id);
-			if ($payment_result['result'] === "success") {
-			} else {
-			}
 			break;
 		default:
 			$response['code'] = 405;

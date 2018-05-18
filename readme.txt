@@ -36,9 +36,9 @@ Stripe:
 PayPal Express:
 {
 	"payment_method": "paypal_express",
-	"payer_id": "EC-xxxxxxxxxxxx",
+	"payer_id": "payerIdFromPayPalExpressCheckout",
 	"order_id": "7843",
-	"payment_token":"tok_from_paypal_express_checkout"
+	"payment_token":"EC-xxxx_tok_from_paypal_express_checkout"
 }
 
 
