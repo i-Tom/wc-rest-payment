@@ -119,7 +119,7 @@ class Wc_Rest_Payment_Public {
 				$response['message'] = __("Please enter valid card details", "wc-rest-payment");
 			}
 			break;
-		case "paypal-express":
+		case "paypal_express":
 			// @see: https://github.com/woocommerce/woocommerce-gateway-paypal-express-checkout/blob/20cd2ba6f66d64106354b1dee314e201b441bc5a/includes/abstracts/abstract-wc-gateway-ppec.php
 			// @author: Jack
 			$checkout = wc_gateway_ppec()->checkout;

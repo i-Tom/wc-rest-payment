@@ -170,6 +170,9 @@ class Wc_Rest_Payment {
 
 		$plugin_public = new Wc_Rest_Payment_Public($this->get_plugin_name(), $this->get_version());
 
+		// Adds REST API Route for Process Payment
+		$this->loader->add_action('rest_api_init', $plugin_public, 'add_api_routes');
+
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
