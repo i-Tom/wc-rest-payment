@@ -1,114 +1,85 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://sk8.tech
-Tags: comments, spam
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+=== WC REST Payment ===
+Contributors: jack50n9, sk8tech
+Donate link: https://sk8.tech/donate
+Tags: wc, woocommerce, wc payment, woocommerce payment, rest payment, payment api, payment rest api, json, stripe, stripe payment
+Requires at least: 4.7.0
+Tested up to: 4.9.8
+Requires PHP: 5.2.4
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
-
+ 
+WC REST Payment adds in the missing REST API endpoint for **process payment** in `WooCommerce`. 
+ 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+If you are a front end developer, looking to develop an app/web with WordPress+WooCommerce as your backend using REST API. You will find that [WooCommerce docs does](http://woocommerce.github.io/woocommerce-rest-api-docs/) not provide the **process payment** endpoint. 
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+WC REST Payment adds in the missing REST API endpoint for **process payment** in `WooCommerce`. 
+ 
+**IMPORTANT NOTICE:**
 
-A few notes about the sections above:
+After payment is processed successfully, the `status` of `order` will be automatically changed to **Completed**. 
+If you with to the status to be set to status other than **Complete** after successful payment process, please submit a pull request.
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+= Usage =
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+Send request with JSON body. See Screenshot.
 
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+{
+	"payment_method": "stripe",
+	"order_id": "7843",
+	"payment_token":"tok_mastercard"
+}
 
+1. A list of available `payment_method` can be found at FAQ below.
+2. ¡®order_id¡¯ should be the existing order id in your WooCommerce dashbaord.
+3. A list of available `payment_token ` for Test Mode can be found at [Stripe Testing](https://stripe.com/docs/testing).
+ 
 == Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `wc-rest-payment.php` to the `/wp-content/plugins/` directory
+  
+1. Upload `wc-rest-payment` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
-
+ 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= What version of WordPress is required? =
 
-An answer to that question.
+For security reasons, We always recommend you use the latest version of WordPress.
+For native REST API support, we recommend you use WordPress 4.7+.
+For WordPress version lower than 4.7, you will need to install [WordPress REST API (Version 2)](https://wordpress.org/plugins/rest-api/).
 
-= What about foo bar? =
+= What version of WooCommerce is required? =
 
-Answer to foo bar dilemma.
+WooCommerce v1.0+
 
+= What payment gateways are supported? =
+
+The supported payment gateways are listed below:
+
+* [Stripe](https://stripe.com)
+ 
+= There's a bug, what do I do? =
+
+Issues and [pull requests](https://github.com/sk8-pty-ltd/wc-rest-payment/pulls) are welcome at [Github repo](https://github.com/sk8-pty-ltd/wc-rest-payment).
+ 
 == Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
-
+ 
+1. An sample REST API POST request to process payment using [WC REST Payment](https://wordpress.org/plugins/wc-rest-payment/).
+ 
 == Changelog ==
-
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+ 
+= 1.1.0 =
+* Restructured plugin directory for future development.
+ 
+= 1.0.0 =
+* Initial Release.
+* REST API endpoint for Stripe Payment Gateway
 
 == Upgrade Notice ==
 
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
+Nothing to worry! Install away!
+ 
+== Contact Us ==
 
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+Based in Sydney, [SK8Tech](https://sk8.tech) is a innovative company providing IT services to SMEs, including [Web Design](https://sk8.tech/services/web-design), App Development and more.
