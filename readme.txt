@@ -49,6 +49,15 @@ PayPal Express:
 	1. PayPal: An integration guide for testing can be found at [Test your integration
 ](https://developer.paypal.com/docs/classic/express-checkout/ec_test_your_integration/).
 
+= Technical Support =
+
+**SK8Tech - Customer Success Specialist** offers **Technical Support** to configure or install ***WP REST User***.
+
+= Our Services =
+ * [SK8Tech Sydney Web Design](https://sk8.tech/services/web-design/)
+ * [SK8Tech Enterprise Email Hosting](https://sk8.tech/services/enterprise/email-hosting/)
+ * [SK8Tech Emergency IT Support](https://sk8.tech/services/enterprise/it-support/emergency-support/)
+ * [SK8Tech WeChat Advertising](https://sk8.tech/services/wechat/)
  
 == Installation ==
   
